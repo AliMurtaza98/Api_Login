@@ -35,6 +35,8 @@
 		-->
         <title>Rock Band Searcher</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- PARA INSTALAR Y PERMITIR CORS -->
+    <!--https://stackoverflow.com/questions/7067966/how-to-allow-cors -->
     </head>
     <body>
 
@@ -59,12 +61,9 @@
                     }).done(function (msg) {
                       console.log(msg);
                       if(msg.status == "OK"){
-                         $('#text').text('Bienvenido ' + msg.username);
                       } else {
-                        $('#text').text('Usuario o contraseña incorrecto');
+                        alert("Usuario Incorrecto!");
                       }
-
-                      $('#text').show();
 
                     }).fail(function (msg) {
                       alert("ERROR");
