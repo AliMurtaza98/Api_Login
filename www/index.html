@@ -30,7 +30,7 @@
         -->
 		<!--SCRIPT AJAX-->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
@@ -38,16 +38,73 @@
         <title>Login PostgreSQL</title>
     </head>
     <body>
+      <div id="page-wrap" >
         <form>
-			Username: <input type="text" id="usuario" name="nombre" placeholder="Enter your name">
-			<br>
-			<br>
-			Password: <input type="password" id="contrasena" name="password" placeholder="Enter your password">
-			<br>
-			<br>
-			<input type="submit" id="boton" value="Log In" onclick=ConnectAPI()>
-		</form>
-        <script type="text/javascript" src="cordova.js"></script>
+      			Username: <input type="text" id="usuario" name="nombre" placeholder="Enter your name">
+      			<br>
+      			<br>
+      			Password: <input type="password" id="contrasena" name="password" placeholder="Enter your password">
+      			<br>
+      			<br>
+          </form>
+          <button id="boton" onClick="connectionAPI()">Log In</button>
+      </div>
+      <footer>
+		<p>Author: Ali Murtaza</p>
+		<p>Contact information: <a href="https://github.com/AliMurtaza98">
+		https://github.com/AliMurtaza98</a>.</p>
+	</footer>
+  <script type="text/javascript">
+    function connectionAPI() {
+      var usuario = $("#usuario").val();
+      var contrasena = $("#contrasena").val();
+        $.ajax({
+          method: "GET",
+          url: "https://still-headland-72061.herokuapp.com/db/api/login/"+usuario+"/"+contrasena,
+          dataType: "json",
+        }).done(function (msg) {
+          console.log(msg);
+          if(msg.status == "OK"){
+            alert("Bienvenido  "+username+" !");
+          } else {
+            alert("Datos incorrectos "+username+"!");
+          }
+        }).fail(function () {
+            	alert("ERROR");
+            });
+          }
+    </script>
+      <style>
+
+		body{
+      margin-top: 10px;
+			background-color:#afafaf;
+			font-size:20px;
+		}
+		#page-wrap{
+			margin-left:45%;
+		}
+		#boton{
+			background-color: #f442c5;
+			border: none;
+			height:20px;
+			color: white;
+			font-size: 16px;
+			margin-top:10px;
+			margin-left: 105px;
+		}
+		#TextField{
+			margin-top:20px;
+		}
+		footer {
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			background-color: #939393;
+			text-align: center;
+}
+	</style>
         <script type="text/javascript" src="js/index.js"></script>
     </body>
 </html>
